@@ -1,0 +1,287 @@
+{
+  "name": "UNO Stress Test",
+  "images": "images",
+  "game_version": [
+    0,
+    0,
+    1
+  ],
+  "board": {
+    "background_image": "bg.jpg",
+    "border": {
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "scale": {
+        "x": 20,
+        "y": 20
+      }
+    },
+    "coordinate_scale": {
+      "x": 64,
+      "y": 64
+    }
+  },
+  "templates": {
+    "DRAW_PILE": {
+      "name": "DRAW_PILE",
+      "type": "collection",
+      "coll_type": "stack",
+      "position": {
+        "x": -1.5,
+        "y": 0
+      },
+      "gobject_scale": {
+        "x": 2.5,
+        "y": 3.5
+      },
+      "rotation_degrees": 0.0,
+      "permanent": true,
+      "force_state": false,
+      "view_perms": [
+        false,
+        false,
+        false,
+        false
+      ]
+    },
+    "UNO_CARD": {
+      "type": "piece",
+      "face_up": false,
+      "collection": "DRAW_PILE",
+      "image_up": "UNO_$@.png",
+      "image_down": "UNO_FLIPPED.png",
+      "gobject_scale": {
+        "x": 2.5,
+        "y": 3.5
+      },
+      "rotation_degrees": 0.0
+    },
+    "PLACE_PILE": {
+      "type": "collection",
+      "coll_type": "stack",
+      "name": "PLACE_PILE",
+      "position": {
+        "x": 1.5,
+        "y": 0
+      },
+      "gobject_scale": {
+        "x": 2.5,
+        "y": 3.5
+      },
+      "rotation_degrees": 0.0,
+      "permanent": true,
+      "force_state": true,
+      "view_perms": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    "HAND": {
+      "type": "collection",
+      "coll_type": "hand",
+      "gobject_scale": {
+        "x": 10,
+        "y": 3.5
+      },
+      "permanent": true,
+      "force_state": false
+    }
+  },
+  "objects": [
+    {
+      "template": "DRAW_PILE"
+    },
+    {
+      "for": {
+        "$": [
+          "RED",
+          "BLUE",
+          "YELLOW",
+          "GREEN"
+        ],
+        "@": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "DRAW2",
+          "SKIP",
+          "TURN"
+        ]
+      },
+      "repeat": 200,
+      "template": "UNO_CARD"
+    },
+    {
+      "for": {
+        "$": [
+          "DRAW4",
+          "WILD"
+        ],
+        "@": [
+          ""
+        ]
+      },
+      "repeat": 4,
+      "template": "UNO_CARD"
+    },
+    {
+      "template": "PLACE_PILE"
+    },
+    {
+      "template": "HAND",
+      "name": "HAND_1",
+      "position": {
+        "x": 0,
+        "y": 8
+      },
+      "rotation_degrees": 0.0,
+      "view_perms": [
+        true,
+        false,
+        false,
+        false
+      ],
+      "access_perms": [
+        true,
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "template": "HAND",
+      "name": "HAND_2",
+      "position": {
+        "x": -8,
+        "y": 0
+      },
+      "rotation_degrees": 90,
+      "view_perms": [
+        false,
+        true,
+        false,
+        false
+      ],
+      "access_perms": [
+        false,
+        true,
+        false,
+        false
+      ]
+    },
+    {
+      "template": "HAND",
+      "name": "HAND_3",
+      "position": {
+        "x": 0,
+        "y": -8
+      },
+      "rotation_degrees": 180.0,
+      "view_perms": [
+        false,
+        false,
+        true,
+        false
+      ],
+      "access_perms": [
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "template": "HAND",
+      "name": "HAND_4",
+      "position": {
+        "x": 8,
+        "y": 0
+      },
+      "rotation_degrees": 270,
+      "view_perms": [
+        false,
+        false,
+        false,
+        true
+      ],
+      "access_perms": [
+        false,
+        false,
+        false,
+        true
+      ]
+    }
+  ],
+  "player": {
+    "min": 1,
+    "max": 4
+  },
+  "actions": [
+    {
+      "name": "Start Game",
+      "actions": [
+        {
+          "cmd": "reset_board"
+        },
+        {
+          "cmd": "shuffle",
+          "args": {
+            "targets": [
+              "DRAW_PILE"
+            ]
+          }
+        },
+        {
+          "repeat": 7,
+          "cmd": "move_top",
+          "args": {
+            "from": "DRAW_PILE",
+            "to": "HAND_1"
+          }
+        },
+        {
+          "repeat": 7,
+          "cmd": "move_top",
+          "args": {
+            "from": "DRAW_PILE",
+            "to": "HAND_2"
+          }
+        },
+        {
+          "repeat": 7,
+          "cmd": "move_top",
+          "args": {
+            "from": "DRAW_PILE",
+            "to": "HAND_3"
+          }
+        },
+        {
+          "repeat": 7,
+          "cmd": "move_top",
+          "args": {
+            "from": "DRAW_PILE",
+            "to": "HAND_4"
+          }
+        },
+        {
+          "cmd": "move_top",
+          "args": {
+            "from": "DRAW_PILE",
+            "to": "PLACE_PILE"
+          }
+        }
+      ]
+    }
+  ]
+}
