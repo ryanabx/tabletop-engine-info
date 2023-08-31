@@ -1,0 +1,23 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": ".",
+    "title": "GameObject",
+    "description": "A generic game object",
+    "type": "object",
+    "properties": {
+        "position": {
+            "description": "The object's position",
+            "$ref": "../vector2.schema.json"
+        },
+        "size": {
+            "description": "The size of the object",
+            "$ref": "../vector2.schema.json"
+        },
+        "rotation": {
+            "description": "The rotation of the object (in radians)",
+            "type": "number"
+        }
+    },
+    "required": [ "position", "size" ],
+    "additionalProperties": false
+}

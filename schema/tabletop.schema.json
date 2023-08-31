@@ -56,10 +56,17 @@
         },
         "tabletopTemplates": {
             "description": "Templates used by this tabletop in tabletopObjects. Essentially overrides for objects you use multiple times",
-            "type": "object"
+            "type": "array",
+            "items": {
+                "$ref": "./game_object.schema.json"
+            }
         },
         "tabletopObjects": {
-            "description": "Objects to place in the tabletop. Use repeat and for as needed to modify properties"
+            "description": "Objects to place in the tabletop. Use repeat and for as needed to modify properties",
+            "type": "array",
+            "items": {
+                "$ref": "./game_object.schema.json"
+            }
         },
         "tabletopProgramming": {
             "description": "Programmability for this tabletop. Specify actions, triggers, and more"

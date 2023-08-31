@@ -1,0 +1,13 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": ".",
+    "title": "ObjectTemplate",
+    "description": "A template to spawn one or many of a game object",
+    "type": "object",
+    "properties": {
+        "GameObject": {
+            "description": "The properties for the GameObject(s) to be spawned"
+        }
+    },
+    "required": [ "GameObject" ]
+}
