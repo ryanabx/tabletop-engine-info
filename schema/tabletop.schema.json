@@ -1,0 +1,70 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": ".",
+    "title": "Tabletop",
+    "description": "The reference schema for Open Tabletop v0.1.0",
+    "type": "object",
+    "properties": {
+        "name": {
+            "description": "The name of the tabletop",
+            "type": "string"
+        },
+        "schemaVersion": {
+            "description": "The Tabletop Schema version for this tabletop",
+            "type": "integer"
+        },
+        "tabletopProperties": {
+            "description": "General tabletop properties",
+            "type": "object",
+            "properties": {
+                "imageDirectory": {
+                    "description": "The base directory for where images for the tabletop are stored, relative to the tabletop configuration",
+                    "type": "string"
+                },
+                "backgroundImage": {
+                    "description": "The background image for the tabletop, relative to imageDirectory",
+                    "type": "string"
+                },
+                "coordinateScale": {
+                    "description": "Optional scaling for the tabletop coordinates",
+                    "$ref": "./vector2.schema.json"
+                },
+                "tabletopBoundaries": {
+                    "description": "The boundaries for this tabletop",
+                    "$ref": "./rect2.schema.json"
+                },
+                "playerCount": {
+                    "description": "Player count for the tabletop",
+                    "type": "object",
+                    "properties": {
+                        "min": {
+                            "description": "Minimum number of players",
+                            "type": "integer",
+                            "inclusiveMinimum": 1
+                        },
+                        "max": {
+                            "description": "Maximum number of players",
+                            "type": "integer",
+                            "inclusiveMinimum": 1
+                        }
+                    },
+                    "required": [ "min", "max" ]
+                },
+                "required": [ "imageDirectory", "tabletopBoundaries", "playerCount" ],
+                "additionalProperties": false
+            }
+        },
+        "tabletopTemplates": {
+            "description": "Templates used by this tabletop in tabletopObjects. Essentially overrides for objects you use multiple times",
+            "type": "object"
+        },
+        "tabletopObjects": {
+            "description": "Objects to place in the tabletop. Use repeat and for as needed to modify properties"
+        },
+        "tabletopProgramming": {
+            "description": "Programmability for this tabletop. Specify actions, triggers, and more"
+        }
+    },
+    "required": [ "name", "schemaVersion", "tabletopProperties" ],
+    "additionalProperties": false
+}

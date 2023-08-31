@@ -1,0 +1,19 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": ".",
+    "title": "Vector2",
+    "description": "A 2-dimensional vector",
+    "type": "object",
+    "properties": {
+        "x": {
+            "description": "x-coordinate of this vector",
+            "type": "number"
+        },
+        "y": {
+            "description": "y-coordinate of this vector",
+            "type": "number"
+        }
+    },
+    "required": [ "x", "y" ],
+    "additionalProperties": false
+}
