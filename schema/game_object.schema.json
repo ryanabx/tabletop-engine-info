@@ -18,6 +18,5 @@
             "type": "number"
         }
     },
-    "required": [ "position", "size" ],
-    "additionalProperties": false
+    "required": [ "position", "size" ]
 }

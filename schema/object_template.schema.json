@@ -9,5 +9,6 @@
             "description": "The properties for the GameObject(s) to be spawned"
         }
     },
-    "required": [ "GameObject" ]
+    "required": [ "GameObject" ],
+    "additionalProperties": false
 }
