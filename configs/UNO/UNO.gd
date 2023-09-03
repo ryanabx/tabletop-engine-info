@@ -36,9 +36,27 @@ func export_settings() -> Dictionary:
         "include_image_types": [".png", ".jpg"]
     }
 
+func can_stack_piece(piece: Piece, collection: Collection) -> bool:
+    if collection.name != "PLACE_PILE" or collection.get_inside().is_empty():
+        return true
+    var types_1 = collection.get_inside().back().types
+    var types_2 = piece.types
+
+    if "WILD" in types_1 or "WILD" in types_2\
+    or "DRAW4" in types_1 or "DRAW4" in types_2:
+        return true
+    
+    for type in types_1:
+        if type in types_2:
+            return true
+    
+    return false
+
+
 func add_board(_board: Board) -> void:
     self.board = _board
-    board.set_border(Rect2(-10 * BASE_SIZE, -10 * BASE_SIZE, 20 * BASE_SIZE, 20 * BASE_SIZE))
+    board.set_border(Rect2(-10 * BASE_SIZE, -10 * BASE_SIZE,\
+    20 * BASE_SIZE, 20 * BASE_SIZE))
     board.set_background("images/bg.jpg")
 
 func game_start() -> void:
@@ -65,7 +83,8 @@ func game_start() -> void:
                         "image_up": str("images/UNO_",color,type,".png"),
                         "image_down": "images/UNO_FLIPPED.png",
                         "size": Vector2(2.5 * BASE_SIZE, 3.5 * BASE_SIZE),
-                        "rotation": 0.0
+                        "rotation": 0.0,
+                        "types": [color, type]
                     }
                 )
     for type in SPECIAL_CARDS:
@@ -77,7 +96,19 @@ func game_start() -> void:
                     "image_up": str("images/UNO_",type,".png"),
                     "image_down": "images/UNO_FLIPPED.png",
                     "size": Vector2(2.5 * BASE_SIZE, 3.5 * BASE_SIZE),
-                    "rotation": 0.0
+                    "rotation": 0.0,
+                    "types": [type]
                 }
             )
+    board.create_collection(
+        {
+            "name": "PLACE_PILE",
+            "position": Vector2(1.5 * BASE_SIZE, 0 * BASE_SIZE),
+            "size": Vector2(2.5 * BASE_SIZE, 3.5 * BASE_SIZE),
+            "rotation": 0.0,
+            "permanent": true,
+            "force_state": true,
+            "view_perms": [true, true, true, true]
+        }
+    )
     
