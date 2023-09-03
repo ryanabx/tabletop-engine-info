@@ -1,11 +1,11 @@
 class_name UNO
 extends TabletopGame
 
+const BASE_SIZE: float = 64.0
+
 const COLORS: Array[String] = [
     "RED", "BLUE", "YELLOW", "GREEN"
 ]
-
-const BASE_SIZE: float = 64.0
 
 const CARD_TYPES: Array[String] = [
     "0", "1", "2", "3", "4", "5", "6",
@@ -111,4 +111,3 @@ func game_start() -> void:
             "view_perms": [true, true, true, true]
         }
     )
-    
