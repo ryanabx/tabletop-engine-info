@@ -55,13 +55,14 @@ func can_stack_piece(piece: Piece, collection: Collection) -> bool:
 
 func add_board(_board: Board) -> void:
     self.board = _board
-    board.set_border(Rect2(-10 * BASE_SIZE, -10 * BASE_SIZE,\
-    20 * BASE_SIZE, 20 * BASE_SIZE))
-    board.set_background("images/bg.jpg")
+    board.border = Rect2(-10 * BASE_SIZE, -10 * BASE_SIZE,\
+    20 * BASE_SIZE, 20 * BASE_SIZE)
+    board.background = "images/bg.jpg"
 
 func game_start() -> void:
     board.clear_board()
-    board.create_collection(
+    var draw_pile: Collection = board.new_game_object(
+        Collection,
         {
             "name": "DRAW_PILE",
             "position": Vector2(-1.5 * BASE_SIZE, 0 * BASE_SIZE),
@@ -69,17 +70,17 @@ func game_start() -> void:
             "coll_type": "stack",
             "rotation": 0.0,
             "permanent": true,
-            "force_state": false,
-            "view_perms": [false, false, false, false]
+            "lock_state": true,
+            "face_up": false
         }
     )
     for color in COLORS:
         for type in CARD_TYPES:
             for i in range(2):
-                board.create_piece(
+                var pc: Piece = board.new_game_object(
+                    Piece,
                     {
                         "face_up": false,
-                        "collection": "DRAW_PILE",
                         "image_up": str("images/UNO_",color,type,".png"),
                         "image_down": "images/UNO_FLIPPED.png",
                         "size": Vector2(2.5 * BASE_SIZE, 3.5 * BASE_SIZE),
@@ -87,12 +88,14 @@ func game_start() -> void:
                         "types": [color, type]
                     }
                 )
+                draw_pile.add_piece(pc)
+                
     for type in SPECIAL_CARDS:
         for i in range(4):
-            board.create_piece(
+            var pc: Piece = board.new_game_object(
+                Piece,
                 {
                     "face_up": false,
-                    "collection": "DRAW_PILE",
                     "image_up": str("images/UNO_",type,".png"),
                     "image_down": "images/UNO_FLIPPED.png",
                     "size": Vector2(2.5 * BASE_SIZE, 3.5 * BASE_SIZE),
@@ -100,14 +103,16 @@ func game_start() -> void:
                     "types": [type]
                 }
             )
-    board.create_collection(
+            draw_pile.add_piece(pc)
+    board.new_game_object(
+        Collection,
         {
             "name": "PLACE_PILE",
             "position": Vector2(1.5 * BASE_SIZE, 0 * BASE_SIZE),
             "size": Vector2(2.5 * BASE_SIZE, 3.5 * BASE_SIZE),
             "rotation": 0.0,
             "permanent": true,
-            "force_state": true,
-            "view_perms": [true, true, true, true]
+            "lock_state": true,
+            "face_up": true
         }
     )
