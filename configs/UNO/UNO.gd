@@ -67,7 +67,6 @@ func game_start() -> void:
             "name": "DRAW_PILE",
             "position": Vector2(-1.5 * BASE_SIZE, 0 * BASE_SIZE),
             "size": Vector2(2.5 * BASE_SIZE, 3.5 * BASE_SIZE),
-            "coll_type": "stack",
             "rotation": 0.0,
             "permanent": true,
             "lock_state": true,
