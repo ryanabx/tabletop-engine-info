@@ -62,7 +62,7 @@ func add_board(_board: Board) -> void:
 func game_start() -> void:
     board.clear_board()
     var draw_pile: Collection = board.new_game_object(
-        Collection,
+        Board.GameObjectType.COLLECTION,
         {
             "name": "DRAW_PILE",
             "position": Vector2(-1.5 * BASE_SIZE, 0 * BASE_SIZE),
@@ -77,7 +77,7 @@ func game_start() -> void:
         for type in CARD_TYPES:
             for i in range(2):
                 var pc: Piece = board.new_game_object(
-                    Piece,
+                    Board.GameObjectType.PIECE,
                     {
                         "face_up": false,
                         "image_up": str("images/UNO_",color,type,".png"),
@@ -92,7 +92,7 @@ func game_start() -> void:
     for type in SPECIAL_CARDS:
         for i in range(4):
             var pc: Piece = board.new_game_object(
-                Piece,
+                Board.GameObjectType.PIECE,
                 {
                     "face_up": false,
                     "image_up": str("images/UNO_",type,".png"),
@@ -104,7 +104,7 @@ func game_start() -> void:
             )
             draw_pile.add_piece(pc)
     board.new_game_object(
-        Collection,
+        Board.GameObjectType.COLLECTION,
         {
             "name": "PLACE_PILE",
             "position": Vector2(1.5 * BASE_SIZE, 0 * BASE_SIZE),
