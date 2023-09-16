@@ -83,7 +83,7 @@ func add_board(_board: Board) -> void:
     var num_players = board.number_of_players
     var extent: float = 6 + num_players 
     board.border = Rect2(Vector2.ONE * -extent * BASE_SIZE, Vector2.ONE * extent * 2 * BASE_SIZE)
-    hand_position = Vector2(0 * BASE_SIZE, (extent - 2) * BASE_SIZE)
+    hand_position = Vector2(0 * BASE_SIZE, (extent - 3) * BASE_SIZE)
     board.background = "images/bg.jpg"
 
 func game_start() -> void:
