@@ -123,7 +123,61 @@ func game_start() -> void:
             "position": Vector2(0 * BASE_SIZE, 7 * BASE_SIZE),
             "size": Vector2(8 * BASE_SIZE, 3.5 * BASE_SIZE),
             "size_pieces": Vector2(2.5 * BASE_SIZE, 3.5 * BASE_SIZE),
-            "visibility": Hand.VisibilitySetting.ALL,
+            "visibility": Hand.VisibilitySetting.DESIGNATED,
+            "designated_players": [1],
             "size_option": Hand.SizeOption.GROW_FIXED
         }
     )
+
+    board.new_game_object(
+        board.GameObjectType.HAND,
+        {
+            "name": "PLAYER_2_HAND",
+            "position": Vector2(7 * BASE_SIZE, 0 * BASE_SIZE),
+            "rotation_degrees": 270,
+            "size": Vector2(8 * BASE_SIZE, 3.5 * BASE_SIZE),
+            "size_pieces": Vector2(2.5 * BASE_SIZE, 3.5 * BASE_SIZE),
+            "visibility": Hand.VisibilitySetting.DESIGNATED,
+            "designated_players": [2],
+            "size_option": Hand.SizeOption.GROW_FIXED
+        }
+    )
+
+    board.new_game_object(
+        board.GameObjectType.HAND,
+        {
+            "name": "PLAYER_3_HAND",
+            "position": Vector2(0 * BASE_SIZE, -7 * BASE_SIZE),
+            "rotation_degrees": 180,
+            "size": Vector2(8 * BASE_SIZE, 3.5 * BASE_SIZE),
+            "size_pieces": Vector2(2.5 * BASE_SIZE, 3.5 * BASE_SIZE),
+            "visibility": Hand.VisibilitySetting.DESIGNATED,
+            "designated_players": [3],
+            "size_option": Hand.SizeOption.GROW_FIXED
+        }
+    )
+
+    board.new_game_object(
+        board.GameObjectType.HAND,
+        {
+            "name": "PLAYER_4_HAND",
+            "position": Vector2(-7 * BASE_SIZE, 0 * BASE_SIZE),
+            "rotation_degrees": 90,
+            "size": Vector2(8 * BASE_SIZE, 3.5 * BASE_SIZE),
+            "size_pieces": Vector2(2.5 * BASE_SIZE, 3.5 * BASE_SIZE),
+            "visibility": Hand.VisibilitySetting.DESIGNATED,
+            "designated_players": [4],
+            "size_option": Hand.SizeOption.GROW_FIXED
+        }
+    )
+
+    call_deferred("deal_cards")
+
+const START_HAND: int = 7
+
+func deal_cards() -> void:
+    board.get_gobject("DRAW_PILE").shuffle()
+    board.move_piece(board.get_gobject("DRAW_PILE"), board.get_gobject("PLACE_PILE"))
+    for hand in ["PLAYER_1_HAND", "PLAYER_2_HAND", "PLAYER_3_HAND", "PLAYER_4_HAND"]:
+        for i in range(START_HAND):
+            board.move_piece(board.get_gobject("DRAW_PILE"), board.get_gobject(hand))
