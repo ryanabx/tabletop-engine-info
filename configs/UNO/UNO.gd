@@ -62,7 +62,7 @@ func add_board(_board: Board) -> void:
 func game_start() -> void:
     board.clear_board()
     var draw_pile: Collection = board.new_game_object(
-        Board.GameObjectType.COLLECTION,
+        board.GameObjectType.DECK,
         {
             "name": "DRAW_PILE",
             "position": Vector2(-1.5 * BASE_SIZE, 0 * BASE_SIZE),
@@ -77,7 +77,7 @@ func game_start() -> void:
         for type in CARD_TYPES:
             for i in range(2):
                 var pc: Piece = board.new_game_object(
-                    Board.GameObjectType.PIECE,
+                    board.GameObjectType.PIECE,
                     {
                         "face_up": false,
                         "image_up": str("images/UNO_",color,type,".png"),
@@ -92,7 +92,7 @@ func game_start() -> void:
     for type in SPECIAL_CARDS:
         for i in range(4):
             var pc: Piece = board.new_game_object(
-                Board.GameObjectType.PIECE,
+                board.GameObjectType.PIECE,
                 {
                     "face_up": false,
                     "image_up": str("images/UNO_",type,".png"),
@@ -104,7 +104,7 @@ func game_start() -> void:
             )
             draw_pile.add_piece(pc)
     board.new_game_object(
-        Board.GameObjectType.COLLECTION,
+        board.GameObjectType.DECK,
         {
             "name": "PLACE_PILE",
             "position": Vector2(1.5 * BASE_SIZE, 0 * BASE_SIZE),
@@ -113,5 +113,17 @@ func game_start() -> void:
             "permanent": true,
             "lock_state": true,
             "face_up": true
+        }
+    )
+
+    board.new_game_object(
+        board.GameObjectType.HAND,
+        {
+            "name": "PLAYER_1_HAND",
+            "position": Vector2(0 * BASE_SIZE, 7 * BASE_SIZE),
+            "size": Vector2(8 * BASE_SIZE, 3.5 * BASE_SIZE),
+            "size_pieces": Vector2(2.5 * BASE_SIZE, 3.5 * BASE_SIZE),
+            "visibility": Hand.VisibilitySetting.ALL,
+            "size_option": Hand.SizeOption.GROW_FIXED
         }
     )

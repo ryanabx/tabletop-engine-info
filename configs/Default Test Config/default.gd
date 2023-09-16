@@ -31,7 +31,7 @@ func add_board(_board: Board) -> void:
 func game_start() -> void:
     board.clear_board()
     var draw_pile: Collection = board.new_game_object(
-        Collection,
+        board.GameObjectType.DECK,
         {
             "name": "DRAW_PILE",
             "position": Vector2.ZERO * BASE_SIZE,
@@ -43,7 +43,7 @@ func game_start() -> void:
     )
 
     var place_pile: Collection = board.new_game_object(
-        Collection,
+        board.GameObjectType.DECK,
         {
             "name": "PLACE_PILE",
             "position": Vector2.ONE * 2 * BASE_SIZE,
@@ -56,7 +56,7 @@ func game_start() -> void:
 
     for i in range(20):
         var pc: Piece = board.new_game_object(
-            Piece,
+            board.GameObjectType.PIECE,
             {
                 "size": Vector2.ONE * BASE_SIZE,
                 "image_up": "images/icon.svg",
@@ -68,7 +68,7 @@ func game_start() -> void:
     
     for i in range(20):
         var pc: Piece = board.new_game_object(
-            Piece,
+            board.GameObjectType.PIECE,
             {
                 "size": Vector2.ONE * BASE_SIZE,
                 "image_up": "images/icon.svg",
