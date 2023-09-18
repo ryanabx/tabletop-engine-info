@@ -28,9 +28,6 @@ const SPECIAL_CARDS: Array[String] = [
     "DRAW4", "WILD"
 ]
 
-func _init() -> void:
-    pass
-
 func settings() -> Dictionary:
     return {
         "max_players": 4,
