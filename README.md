@@ -8,7 +8,7 @@
 
 Tabletop Engine is a cross-platform multiplayer customizable virtual tabletop that connects you and your friends to beloved tabletop games!
 
-This README will be updated when the link for the early access alpha is ready.
+This README will be updated when the link for the early access alpha is ready. EDIT: The early access alpha is live! Check out the releases section for more info!
 
 > **NOTE:** This product is still in early development, please submit issues as you find them, as well as feature requests. I am eager to make Tabletop Engine work as smooth as possible.
 
