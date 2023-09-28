@@ -24,12 +24,12 @@ Multiplayer sessions support as many people as the network speed would allow, al
 
 Tabletop Engine supports the following six platforms:
 
-* Windows - Native support coming in `1.0`
+* Windows
 * MacOS - Native support coming in `1.0`
 * Linux - Native support coming in `1.0`
 * iOS - Native support coming in `1.0`
 * Android - Native support coming in `1.0`
-* Web
+* Web - Native support coming in `1.0`
 
 You can play multiplayer between these devices as desired, there are no limitations!
 
